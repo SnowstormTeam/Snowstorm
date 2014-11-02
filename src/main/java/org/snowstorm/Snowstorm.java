@@ -20,6 +20,15 @@ public class Snowstorm
 		coreLogger.info( "Starting Snowstorm " + CORE_VERSION + "..." );
 	}
 	
+	public static void shutdown()
+	{
+		coreLogger.info( "Snowstorm shutting down..." );
+		
+		System.exit( 0 );
+	}
+	
+	
+	
 	public static LogManager logging()
 	{
 		return logManager;
