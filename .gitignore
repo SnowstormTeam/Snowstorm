@@ -1,0 +1,14 @@
+# Project #
+###########
+.classpath
+.project
+.settings
+
+# Compiled #
+############
+target
+*.class
+
+# Jar Files #
+#############
+*.jar
