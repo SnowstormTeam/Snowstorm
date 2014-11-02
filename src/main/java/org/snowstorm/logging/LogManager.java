@@ -2,23 +2,22 @@ package org.snowstorm.logging;
 
 import java.io.File;
 import java.io.FileWriter;
-import java.nio.file.Paths;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.snowstorm.Snowstorm;
+
 public class LogManager
 {
 	private static List< Logger > logger = new ArrayList< Logger >();
 	
 	private static DateFormat timeFormat = new SimpleDateFormat( "HH:mm:ss" );
-	
-	private String loggingDirectory;
-	private File loggingFile;
-	
+
 	private boolean fileLogging = true;
+	private File loggingFile;
 	
 	public LogManager()
 	{
@@ -71,10 +70,11 @@ public class LogManager
 	
 	public void createLogDirectory()
 	{
-		File dir = new File( "log" );
+		File dir = new File( Snowstorm.LOGGING_DIRECTORY );
 		
 		if( !dir.exists() )
 		{
+			console( "Create logging directory..." );
 			try
 			{
 				dir.mkdir();
@@ -86,13 +86,6 @@ public class LogManager
 				return;
 			}
 		}
-		
-		loggingDirectory = Paths.get( "log" ).toAbsolutePath().toString();
-	}
-	
-	public String getLogDirectory()
-	{
-		return this.loggingDirectory;
 	}
 	
 	public void createLogFile()
@@ -102,17 +95,18 @@ public class LogManager
 		do
 		{
 			filenr = filenr + 1;
-			loggingFile = new File( loggingDirectory + "/serverlog" + filenr + ".log" );
+			loggingFile = new File( Snowstorm.LOGGING_DIRECTORY + "/serverlog" + filenr + ".log" );
 		}
 		while( loggingFile.exists() );
-		
+
+		console( "Create log file " + loggingFile.getName() + "..." );
 		try
 		{
 			loggingFile.createNewFile();
 		}
 		catch( Exception e )
 		{
-			console( "Cannot create logging File" );
+			console( "Cannot create logging file" );
 			disableFileLogging();
 		}
 	}

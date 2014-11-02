@@ -1,28 +1,32 @@
 package org.snowstorm;
 
 import org.snowstorm.logging.LogManager;
-import org.snowstorm.logging.Logger;
+import org.snowstorm.plugin.PluginManager;
 
 public class Snowstorm
 {
 	public static final String CORE_VERSION = "0.1-DEV";
 	
-	private static LogManager logManager;
+	public static final String PLUGIN_DIRECTORY = "plugins";
+	public static final String LOGGING_DIRECTORY = "log";
 	
-	private static Logger coreLogger;
+	private static LogManager logManager;
+	private static PluginManager pluginManager;
 	
 	public static void main( String[] args )
 	{
 		logManager = new LogManager();
+		pluginManager = new PluginManager();
 		
-		coreLogger = logManager.getLogger( "Core" );
+		logging().getLogger( "Core" ).info( "Starting Snowstorm " + CORE_VERSION + "..." );
 		
-		coreLogger.info( "Starting Snowstorm " + CORE_VERSION + "..." );
+		pluginManager.loadPlugins();
+		pluginManager.enablePlugins();
 	}
 	
 	public static void shutdown()
 	{
-		coreLogger.info( "Snowstorm shutting down..." );
+		logging().getLogger( "Core" ).info( "Snowstorm shutting down..." );
 		
 		System.exit( 0 );
 	}
@@ -32,5 +36,10 @@ public class Snowstorm
 	public static LogManager logging()
 	{
 		return logManager;
+	}
+	
+	public static PluginManager plugins()
+	{
+		return pluginManager;
 	}
 }
