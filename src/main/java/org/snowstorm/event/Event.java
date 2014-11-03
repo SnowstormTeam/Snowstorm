@@ -15,12 +15,12 @@ public abstract class Event
 	
 	
 	
-	final void setCancelled( boolean cancel )
+	public final void setCancelled( boolean cancel )
 	{
 		this.cancelled = cancel;
 	}
 	
-	final boolean isCancelled()
+	public final boolean isCancelled()
 	{
 		return this.cancelled;
 	}
