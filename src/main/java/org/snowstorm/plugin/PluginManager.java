@@ -80,7 +80,6 @@ public class PluginManager
 			if( cont.getState() == PluginState.ENABLED )
 			{
 				cont.getPlugin().registerCommands();
-				cont.getPlugin().registerEvents();
 			}
 		}
 		

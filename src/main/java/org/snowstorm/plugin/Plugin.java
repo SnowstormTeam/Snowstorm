@@ -10,8 +10,6 @@ public abstract class Plugin
 	
 	public abstract void disablePlugin();
 	
-	public abstract void registerEvents();
-	
 	public abstract void registerCommands();
 	
 	public abstract void registerHandlers();

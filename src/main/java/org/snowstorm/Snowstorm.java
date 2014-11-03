@@ -1,5 +1,6 @@
 package org.snowstorm;
 
+import org.snowstorm.event.EventManager;
 import org.snowstorm.logging.LogManager;
 import org.snowstorm.plugin.PluginManager;
 
@@ -12,11 +13,13 @@ public class Snowstorm
 	
 	private static LogManager logManager;
 	private static PluginManager pluginManager;
+	private static EventManager eventManager;
 	
 	public static void main( String[] args )
 	{
 		logManager = new LogManager();
 		pluginManager = new PluginManager();
+		eventManager = new EventManager();
 		
 		logging().getLogger( "Core" ).info( "Starting Snowstorm " + CORE_VERSION + "..." );
 		
@@ -41,5 +44,10 @@ public class Snowstorm
 	public static PluginManager plugins()
 	{
 		return pluginManager;
+	}
+	
+	public static EventManager events()
+	{
+		return eventManager;
 	}
 }
